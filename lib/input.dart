@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'home.dart';
 import 'button.dart';
 import 'screen1.dart';
-import 'columm.dart';
+import 'column.dart';
+import 'stack.dart';
 
 class NameInputScreen extends StatelessWidget {
   const NameInputScreen({super.key});
@@ -22,7 +23,7 @@ class NameInputScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const AlignExample(),
+                  builder: (context) => const StackExample(),
                 ),
               );
             },
