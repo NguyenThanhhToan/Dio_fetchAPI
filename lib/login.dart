@@ -1,8 +1,8 @@
+import 'package:basic_app/router/app_route.dart';
+import 'package:basic_app/service/user.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'package:get/get.dart';
 import 'button.dart';
-import 'screen1.dart';
-import 'column.dart';
 import 'stack.dart';
 
 class NameInputScreen extends StatelessWidget {
@@ -17,7 +17,6 @@ class NameInputScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-
           FloatingElevatedButton(
             onPressed: () {
               Navigator.push(
@@ -46,40 +45,19 @@ class NameInputField extends StatefulWidget {
 
 class _NameInputFieldState extends State<NameInputField> {
   final TextEditingController _nameController = TextEditingController();
-  String _enteredName = '';
+  final userService = Get.find<UserService>();
 
   @override
-  void initState() {
-    super.initState();
-    _nameController.addListener(_updateName);
-  }
-
-  void _updateName() {
-    setState(() {
-      _enteredName = _nameController.text;
-    });
-  }
-
-  @override
-  void dispose() {
-    _nameController.removeListener(_updateName);
+  void dispose(){
     _nameController.dispose();
     super.dispose();
   }
 
-  void _submitName(String username) {
-    final name = username.trim();
-    if (name.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter your name.')),
-      );
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomeScreen(userName: name),
-        ),
-      );
+  void _submitName() {
+    String name = _nameController.text.trim();
+    if (name.isNotEmpty) {
+      userService.login(name);
+      Get.toNamed(AppRoutes.homeScreen);
     }
   }
 
@@ -93,8 +71,6 @@ class _NameInputFieldState extends State<NameInputField> {
           TextField(
             controller: _nameController,
             obscureText: true,
-            obscuringCharacter: "?",
-            textAlign: TextAlign.start,
             decoration: const InputDecoration(
               labelText: 'Enter your name',
               border: OutlineInputBorder(),
@@ -102,13 +78,8 @@ class _NameInputFieldState extends State<NameInputField> {
             ),
           ),
           const SizedBox(height: 20),
-          Text(
-            'Entered Name: $_enteredName',
-            style: const TextStyle(fontSize: 18),
-          ),
-          const SizedBox(height: 20),
           ElevatedButton.icon(
-            onPressed: () => _submitName(_nameController.text),
+            onPressed: () => _submitName(),
             icon: const Icon(Icons.send),
             label: const Text('Submit'),
           ),
