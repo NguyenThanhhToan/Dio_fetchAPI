@@ -1,16 +1,23 @@
-import 'package:get/get_navigation/src/routes/get_route.dart';
-import '../home.dart';
+import 'package:get/get.dart';
+import '../controller/authController.dart';
+import '../page/home.dart';
 import 'app_route.dart';
-import '../login.dart';
+import '../page/login.dart';
 class AppPages {
   static final routes = [
     GetPage(
       name: AppRoutes.homeScreen,
       page: () => HomeScreen(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<AuthController>(() => AuthController());
+      }),
     ),
     GetPage(
       name: AppRoutes.login,
-      page: () => NameInputScreen(),
+      page: () => loginScreen(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<AuthController>(() => AuthController());
+      }),
     ),
   ];
 }

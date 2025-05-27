@@ -9,7 +9,7 @@ class FloatingElevatedButton extends StatelessWidget {
   const FloatingElevatedButton({
     super.key,
     required this.onPressed,
-    this.label = "Gửi",
+    this.label = "Send",
     this.icon = Icons.send, required this.bottom, required this.right,
   });
 

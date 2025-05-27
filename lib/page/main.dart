@@ -2,20 +2,11 @@ import 'package:basic_app/router/app_page.dart';
 import 'package:basic_app/router/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../service/user.dart';
-void main() {
-  Get.put(UserService());
+import '../../service/authService.dart';
+void main () async {
+  await Get.putAsync(() async => AuthService());
   runApp(const MyApp());
 }
-// // profile_binding.dart
-// class ProfileBinding extends Bindings {
-//   @override
-//   void dependencies() {
-//     Get.lazyPut<ProfileController>(() => ProfileController());
-//     Get.lazyPut<UserController>(() => UserController());
-//     Get.lazyPut<ImageUploadService>(() => ImageUploadService());
-//   }
-// } tim injection cho từng trang.
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
