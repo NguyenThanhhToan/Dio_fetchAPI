@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import '../controller/authController.dart';
 
 
-class loginScreen extends StatelessWidget {
-  const loginScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +15,6 @@ class loginScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          // FloatingElevatedButton(
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => const StackExample(),
-          //       ),
-          //     );
-          //   },
-          //   bottom: 350,
-          //   right: 100,
-          // ),
           Center(child: LoginInputField()),
         ],
       ),

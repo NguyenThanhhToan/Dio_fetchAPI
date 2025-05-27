@@ -1,4 +1,5 @@
 import 'package:basic_app/controller/authController.dart';
+import 'package:basic_app/router/app_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../service/authService.dart';
@@ -22,11 +23,21 @@ class HomeScreen extends GetWidget {
               style: const TextStyle(fontSize: 20),
             )),
             const SizedBox(height: 20),
+
+            Obx(() => ElevatedButton(
+              onPressed: authService.isLoggedIn.value
+                  ? authController.logout
+                  : () => Get.toNamed(AppRoutes.login),
+              child: Text(authService.isLoggedIn.value ? 'Logout' : 'Login'),
+            )),
+            const SizedBox(height: 20),
+
             ElevatedButton(
-              onPressed: authController.logout,
-              child: const Text('Logout'),
+              onPressed: () => Get.toNamed(AppRoutes.provinceListScreen),
+              child: const Text('Province List'),
             ),
             const SizedBox(height: 20),
+
             Image.network(
               'https://picsum.photos/200',
               height: 200,
