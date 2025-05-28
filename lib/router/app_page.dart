@@ -4,6 +4,7 @@ import '../controller/districtController.dart';
 import '../middleWare/authMiddleware.dart';
 import '../page/districtList.dart';
 import '../page/provinceList.dart';
+import '../page/setting.dart';
 import '../service/districtService.dart';
 import '../service/provinceService.dart';
 import 'app_route.dart';
@@ -44,5 +45,10 @@ class AppPages {
       }),
       middlewares: [AuthMiddleware()],
     ),
+    GetPage(
+      name: AppRoutes.settingScreen,
+      page: () => const SettingScreen(),
+    ),
+
   ];
 }

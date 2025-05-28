@@ -11,15 +11,14 @@ class HomeScreen extends GetWidget {
   Widget build(BuildContext context) {
     final authService = Get.find<AuthService>();
     final authController = Get.find<AuthController>();
-    print(authService.pendingArguments);
     return Scaffold(
-      appBar: AppBar(title: const Text('Thông tin người dùng')),
+      appBar: AppBar(title: Text('${'user_info'.tr}')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Obx(() => Text(
-              'Hi! : ${authService.user.value?.name ?? "Guest"}',
+             '${'hello'.tr} : ${authService.user.value?.name ?? "Guest"}',
               style: const TextStyle(fontSize: 20),
             )),
             const SizedBox(height: 20),
@@ -34,9 +33,14 @@ class HomeScreen extends GetWidget {
 
             ElevatedButton(
               onPressed: () => Get.toNamed(AppRoutes.provinceListScreen),
-              child: const Text('Province List'),
+              child: Text('${'provinceList'.tr}'),
             ),
             const SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () => Get.toNamed(AppRoutes.settingScreen),
+              child: Text('${'setting'.tr}'),
+            ),
 
             Image.network(
               'https://picsum.photos/200',
