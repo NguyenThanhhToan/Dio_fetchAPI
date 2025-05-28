@@ -8,9 +8,7 @@ class ProvinceList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provinceController = Get.put(ProvinceController());
-    provinceController.fetchProvinces();
-
+    final provinceController = Get.find<ProvinceController>();
     return Scaffold(
       appBar: AppBar(title: const Text("List province")),
       body: Obx(() {

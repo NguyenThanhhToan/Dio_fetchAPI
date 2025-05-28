@@ -8,10 +8,21 @@ class AuthController extends GetxController{
   final password = ''.obs;
 
   Future<void> handleLogin() async {
-
     await authService.login(userName.value, password.value);
+
     if (authService.isLoggedIn.value) {
-      Get.offAllNamed(AppRoutes.homeScreen);
+
+      final redirectRoute = authService.pendingRoute;
+      final redirectArgs = authService.pendingArguments;
+
+      authService.pendingRoute = null;
+      authService.pendingArguments = null;
+
+      if (redirectRoute != null) {
+        Get.offNamed(redirectRoute, arguments: redirectArgs);
+      } else {
+        Get.offAllNamed(AppRoutes.homeScreen);
+      }
     } else {
       Get.snackbar('Error', 'Email or password is incorrect');
     }

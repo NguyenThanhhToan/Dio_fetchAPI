@@ -3,7 +3,8 @@ import '../model/province.dart';
 import '../service/provinceService.dart';
 
 class ProvinceController extends GetxController{
-  final provinceService = Get.find<ProvinceService>();
+  final ProvinceService provinceService;
+  ProvinceController(this.provinceService);
 
   final provinces = <Province>[].obs;
   var isLoading = false.obs;

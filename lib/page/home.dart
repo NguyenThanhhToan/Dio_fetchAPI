@@ -11,7 +11,7 @@ class HomeScreen extends GetWidget {
   Widget build(BuildContext context) {
     final authService = Get.find<AuthService>();
     final authController = Get.find<AuthController>();
-
+    print(authService.pendingArguments);
     return Scaffold(
       appBar: AppBar(title: const Text('Thông tin người dùng')),
       body: Center(

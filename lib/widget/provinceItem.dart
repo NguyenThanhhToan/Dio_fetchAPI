@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../model/province.dart';
 import '../router/app_route.dart';
+import '../service/authService.dart';
 
 class ProvinceItem extends StatelessWidget{
 
@@ -14,8 +15,11 @@ class ProvinceItem extends StatelessWidget{
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        final authService = Get.find<AuthService>();
+        authService.pendingRoute = AppRoutes.districtScreen;
+        authService.pendingArguments = province.provinceID;
         Get.toNamed(AppRoutes.districtScreen, arguments: province.provinceID);
-        },
+      },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
         padding: const EdgeInsets.all(16.0),

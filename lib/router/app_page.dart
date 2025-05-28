@@ -32,18 +32,15 @@ class AppPages {
       page: () => ProvinceList(),
       binding: BindingsBuilder(() {
         Get.lazyPut<ProvinceService>(() => ProvinceService());
-        Get.lazyPut<ProvinceController>(() => ProvinceController());
+        Get.lazyPut<ProvinceController>(() => ProvinceController(Get.find())..fetchProvinces());
       }),
     ),
     GetPage(
       name: AppRoutes.districtScreen,
-      page: () {
-        final int provinceID = Get.arguments;
-        return DistrictScreen(provinceID: provinceID);
-      },
+      page: () => DistrictScreen(),
       binding: BindingsBuilder(() {
         Get.lazyPut<DistrictService>(() => DistrictService());
-        Get.lazyPut<DistrictController>(() => DistrictController());
+        Get.lazyPut<DistrictController>(() => DistrictController(Get.find()));
       }),
       middlewares: [AuthMiddleware()],
     ),

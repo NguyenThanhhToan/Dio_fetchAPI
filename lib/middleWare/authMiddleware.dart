@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../service/authService.dart';
 
 class AuthMiddleware extends GetMiddleware{
+
   @override
   RouteSettings? redirect(String? route) {
     final authService = Get.find<AuthService>();

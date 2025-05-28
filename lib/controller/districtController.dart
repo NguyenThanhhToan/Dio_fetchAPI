@@ -1,12 +1,23 @@
 import 'package:get/get.dart';
 import '../model/district.dart';
+import '../service/authService.dart';
 import '../service/districtService.dart';
 
 class DistrictController extends GetxController{
-  final districtService = Get.find<DistrictService>();
+  final DistrictService districtService;
+  DistrictController(this.districtService);
 
   final districts = <District>[].obs;
   var isLoading = false.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    final args = Get.arguments;
+    if (args is int) {
+      fetchDistricts(args);
+    }
+  }
 
   Future<void> fetchDistricts(int provinceID) async {
     try{

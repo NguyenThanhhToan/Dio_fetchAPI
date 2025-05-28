@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import '../model/province.dart';
 import '../model/apiResponse.dart';
 
 
-class ProvinceService {
+class ProvinceService extends GetxService {
   final Dio _dio = Dio(BaseOptions(
     baseUrl: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/",
     headers: {
