@@ -28,7 +28,8 @@ class DistrictController extends GetxController {
       final result = await districtService.fetchDistricts(request);
       districts.assignAll(result);
     } catch (e) {
-      print("Failed to fetch districts: $e");
+      print(e);
+      Get.snackbar('Error', 'Some thing is wrong, try again later');
     } finally {
       isLoading.value = false;
     }

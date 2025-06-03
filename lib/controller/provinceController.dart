@@ -15,7 +15,8 @@ class ProvinceController extends GetxController{
       final fetchedProvinces = await provinceService.fetchProvinces();
       provinces.assignAll(fetchedProvinces);
     } catch (e) {
-      Get.snackbar('Error', 'Failed to fetch provinces: $e');
+      print(e);
+      Get.snackbar('Error', 'Some thing is wrong, try again later');
     } finally {
       isLoading.value = false;
     }

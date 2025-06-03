@@ -11,20 +11,20 @@ class ProvinceService extends GetxService {
     try {
       final response = await _dio.get('province');
 
-      if (response.statusCode == 200) {
-        final apiResponse = ApiResponse<List<ProvinceResponse>>.fromJson(
-          response.data,
-              (data) => (data as List)
-              .map((e) => ProvinceResponse.fromJson(e as Map<String, dynamic>))
-              .toList(),
-        );
+      final apiResponse = ApiResponse<List<ProvinceResponse>>.fromJson(
+        response.data,
+            (data) => (data as List)
+            .map((e) => ProvinceResponse.fromJson(e as Map<String, dynamic>))
+            .toList(),
+      );
+      if (apiResponse.code == 200) {
         return apiResponse.data ?? [];
       } else {
-        throw Exception(
-            'Failed to load districts. Status code: ${response.statusCode}');
+        throw Exception('${apiResponse.message} (code: ${apiResponse.code})');
       }
     } catch (e) {
-      throw Exception('Error fetching districts: $e');
+      throw Exception(e);
     }
   }
 }
+
