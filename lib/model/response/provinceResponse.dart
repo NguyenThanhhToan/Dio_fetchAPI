@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'province.g.dart';
+part 'provinceResponse.g.dart';
 
 @JsonSerializable()
-class Province {
+class ProvinceResponse {
   @JsonKey(name: 'ProvinceID')
   final int provinceID;
 
@@ -73,7 +73,7 @@ class Province {
   @JsonKey(name: 'UpdatedIP')
   final String? updatedIP;
 
-  Province({
+  ProvinceResponse({
     required this.provinceID,
     required this.provinceName,
     required this.countryID,
@@ -99,7 +99,7 @@ class Province {
     this.updatedIP,
   });
 
-  factory Province.fromJson(Map<String, dynamic> json) =>
+  factory ProvinceResponse.fromJson(Map<String, dynamic> json) =>
       _$ProvinceFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProvinceToJson(this);

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../model/district.dart';
+import '../model/response/districtResponse.dart';
 
 class DistrictItem extends StatelessWidget{
 
   const DistrictItem({super.key, required this.district});
 
-  final District district;
+  final DistrictResponse district;
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../model/province.dart';
+import '../model/response/provinceResponse.dart';
 import '../router/app_route.dart';
 import '../service/authService.dart';
 
@@ -9,7 +9,7 @@ class ProvinceItem extends StatelessWidget{
 
   const ProvinceItem({super.key, required this.province});
 
-  final Province province;
+  final ProvinceResponse province;
 
   @override
   Widget build(BuildContext context) {

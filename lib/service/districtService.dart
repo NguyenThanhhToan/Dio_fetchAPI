@@ -1,34 +1,28 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+import '../config/apiConfig.dart';
+import '../model/response/apiResponse.dart';
+import '../model/response/districtResponse.dart';
+import '../model/request/districtRequest.dart';
 
-import '../model/apiResponse.dart';
-import '../model/district.dart';
+class DistrictService extends GetxService {
+  final Dio _dio = Dio(ApiConfig.options);
 
-class DistrictService extends GetxService{
-  final Dio _dio = Dio(BaseOptions(
-    baseUrl: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/",
-    headers: {
-      'Token': '8ff33aa8-baa7-11ef-9083-dadc35c0870d',
-      'content-type': 'application/json',
-    },
-    responseType: ResponseType.json,
-  ));
+  Future<List<DistrictResponse>> fetchDistricts(DistrictRequest request) async {
+    try {
+      final response = await _dio.post('district', data: request.toJson());
 
-  Future<List<District>> fetchDistricts(int provinceID) async {
-    try{
-      final response = await _dio.post('district',
-      data: {
-        'province_id': provinceID,
-      });
-      if(response.statusCode == 200) {
-        final apiResponse = ApiResponse<List<District>>.fromJson(
+      if (response.statusCode == 200) {
+        final apiResponse = ApiResponse<List<DistrictResponse>>.fromJson(
           response.data,
-              (data) =>
-              (data as List).map((e) => District.fromJson(e)).toList(),
+              (data) => (data as List)
+              .map((e) => DistrictResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
         );
         return apiResponse.data ?? [];
-      }else{
-        throw Exception('Failed to load districts. Status code: ${response.statusCode}');
+      } else {
+        throw Exception(
+            'Failed to load districts. Status code: ${response.statusCode}');
       }
     } catch (e) {
       throw Exception('Error fetching districts: $e');

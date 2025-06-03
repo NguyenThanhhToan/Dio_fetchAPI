@@ -1,14 +1,15 @@
 import 'package:get/get.dart';
-import '../model/district.dart';
-import '../service/authService.dart';
+import '../model/request/districtRequest.dart';
+import '../model/response/districtResponse.dart';
 import '../service/districtService.dart';
 
-class DistrictController extends GetxController{
+class DistrictController extends GetxController {
   final DistrictService districtService;
+
   DistrictController(this.districtService);
 
-  final districts = <District>[].obs;
-  var isLoading = false.obs;
+  final districts = <DistrictResponse>[].obs;
+  final isLoading = false.obs;
 
   @override
   void onInit() {
@@ -19,13 +20,15 @@ class DistrictController extends GetxController{
     }
   }
 
-  Future<void> fetchDistricts(int provinceID) async {
-    try{
-      isLoading.value = true;
-      final fetchedDistricts = await districtService.fetchDistricts(provinceID);
-      districts.assignAll(fetchedDistricts);
-    } catch (e){
-      Get.snackbar('Error', 'Failed to fetch districts: $e');
+  Future<void> fetchDistricts(int provinceId) async {
+    final request = DistrictRequest(provinceId: provinceId);
+    isLoading.value = true;
+
+    try {
+      final result = await districtService.fetchDistricts(request);
+      districts.assignAll(result);
+    } catch (e) {
+      print("Failed to fetch districts: $e");
     } finally {
       isLoading.value = false;
     }

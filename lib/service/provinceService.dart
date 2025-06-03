@@ -1,35 +1,30 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import '../model/province.dart';
-import '../model/apiResponse.dart';
-
+import '../config/apiConfig.dart';
+import '../model/response/provinceResponse.dart';
+import '../model/response/apiResponse.dart';
 
 class ProvinceService extends GetxService {
-  final Dio _dio = Dio(BaseOptions(
-    baseUrl: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/",
-    headers: {
-      'Token': '8ff33aa8-baa7-11ef-9083-dadc35c0870d',
-      'Content-Type': 'application/json',
-    },
-    responseType: ResponseType.json,
-  ));
+  final Dio _dio = Dio(ApiConfig.options);
 
-  Future<List<Province>> fetchProvinces() async {
+  Future<List<ProvinceResponse>> fetchProvinces() async {
     try {
       final response = await _dio.get('province');
 
       if (response.statusCode == 200) {
-        final apiResponse = ApiResponse<List<Province>>.fromJson(
+        final apiResponse = ApiResponse<List<ProvinceResponse>>.fromJson(
           response.data,
-              (data) => (data as List).map((e) => Province.fromJson(e)).toList(),
+              (data) => (data as List)
+              .map((e) => ProvinceResponse.fromJson(e as Map<String, dynamic>))
+              .toList(),
         );
         return apiResponse.data ?? [];
       } else {
-        throw Exception('Failed to load provinces. Status code: ${response.statusCode}');
+        throw Exception(
+            'Failed to load districts. Status code: ${response.statusCode}');
       }
     } catch (e) {
-      throw Exception('Error fetching provinces: $e');
+      throw Exception('Error fetching districts: $e');
     }
   }
-
 }

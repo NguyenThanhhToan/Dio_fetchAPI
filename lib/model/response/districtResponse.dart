@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'district.g.dart';
+part 'districtResponse.g.dart';
 
 @JsonSerializable()
-class District {
+class DistrictResponse {
   @JsonKey(name: 'DistrictID')
   final int districtId;
 
@@ -13,13 +13,13 @@ class District {
   @JsonKey(name: 'ProvinceID')
   final int provinceId;
 
-  District({
+  DistrictResponse({
     required this.districtId,
     required this.districtName,
     required this.provinceId,
   });
 
-  factory District.fromJson(Map<String, dynamic> json) =>
+  factory DistrictResponse.fromJson(Map<String, dynamic> json) =>
       _$DistrictFromJson(json);
 
   Map<String, dynamic> toJson() => _$DistrictToJson(this);

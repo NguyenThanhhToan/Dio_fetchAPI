@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'province.dart';
+part of 'provinceResponse.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Province _$ProvinceFromJson(Map<String, dynamic> json) => Province(
+ProvinceResponse _$ProvinceFromJson(Map<String, dynamic> json) => ProvinceResponse(
       provinceID: (json['ProvinceID'] as num).toInt(),
       provinceName: json['ProvinceName'] as String,
       countryID: (json['CountryID'] as num).toInt(),
@@ -34,7 +34,7 @@ Province _$ProvinceFromJson(Map<String, dynamic> json) => Province(
       updatedIP: json['UpdatedIP'] as String?,
     );
 
-Map<String, dynamic> _$ProvinceToJson(Province instance) => <String, dynamic>{
+Map<String, dynamic> _$ProvinceToJson(ProvinceResponse instance) => <String, dynamic>{
       'ProvinceID': instance.provinceID,
       'ProvinceName': instance.provinceName,
       'CountryID': instance.countryID,

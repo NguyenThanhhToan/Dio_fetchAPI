@@ -1,12 +1,12 @@
 import 'package:get/get.dart';
-import '../model/province.dart';
+import '../model/response/provinceResponse.dart';
 import '../service/provinceService.dart';
 
 class ProvinceController extends GetxController{
   final ProvinceService provinceService;
   ProvinceController(this.provinceService);
 
-  final provinces = <Province>[].obs;
+  final provinces = <ProvinceResponse>[].obs;
   var isLoading = false.obs;
 
   Future<void> fetchProvinces() async {
