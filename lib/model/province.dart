@@ -1,26 +1,76 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'province.g.dart';
+
+@JsonSerializable()
 class Province {
+  @JsonKey(name: 'ProvinceID')
   final int provinceID;
+
+  @JsonKey(name: 'ProvinceName')
   final String provinceName;
+
+  @JsonKey(name: 'CountryID')
   final int countryID;
+
+  @JsonKey(name: 'Code')
   final String? code;
+
+  @JsonKey(name: 'NameExtension')
   final List<String>? nameExtension;
+
+  @JsonKey(name: 'IsEnable')
   final int? isEnable;
+
+  @JsonKey(name: 'RegionID')
   final int? regionID;
+
+  @JsonKey(name: 'RegionCPN')
   final int? regionCPN;
+
+  @JsonKey(name: 'UpdatedBy')
   final int? updatedBy;
+
+  @JsonKey(name: 'CreatedAt')
   final String? createdAt;
+
+  @JsonKey(name: 'UpdatedAt')
   final String? updatedAt;
+
+  @JsonKey(name: 'CanUpdateCOD')
   final bool? canUpdateCOD;
+
+  @JsonKey(name: 'Status')
   final int? status;
+
+  @JsonKey(name: 'UpdatedEmployee')
   final int? updatedEmployee;
+
+  @JsonKey(name: 'UpdatedSource')
   final String? updatedSource;
+
+  @JsonKey(name: 'UpdatedDate')
   final String? updatedDate;
+
+  @JsonKey(name: 'ProvinceEncode')
   final String? provinceEncode;
+
+  @JsonKey(name: 'AreaID')
   final int? areaID;
+
+  @JsonKey(name: 'CreatedIP')
   final String? createdIP;
+
+  @JsonKey(name: 'CreatedEmployee')
   final int? createdEmployee;
+
+  @JsonKey(name: 'CreatedSource')
   final String? createdSource;
+
+  @JsonKey(name: 'CreatedDate')
   final String? createdDate;
+
+  @JsonKey(name: 'UpdatedIP')
   final String? updatedIP;
 
   Province({
@@ -49,31 +99,8 @@ class Province {
     this.updatedIP,
   });
 
-  factory Province.fromJson(Map<String, dynamic> json) {
-    return Province(
-      provinceID: json['ProvinceID'],
-      provinceName: json['ProvinceName'],
-      countryID: json['CountryID'],
-      code: json['Code'],
-      nameExtension: (json['NameExtension'] as List?)?.map((e) => e.toString()).toList(),
-      isEnable: json['IsEnable'],
-      regionID: json['RegionID'],
-      regionCPN: json['RegionCPN'],
-      updatedBy: json['UpdatedBy'],
-      createdAt: json['CreatedAt'],
-      updatedAt: json['UpdatedAt'],
-      canUpdateCOD: json['CanUpdateCOD'],
-      status: json['Status'],
-      updatedEmployee: json['UpdatedEmployee'],
-      updatedSource: json['UpdatedSource'],
-      updatedDate: json['UpdatedDate'],
-      provinceEncode: json['ProvinceEncode'],
-      areaID: json['AreaID'],
-      createdIP: json['CreatedIP'],
-      createdEmployee: json['CreatedEmployee'],
-      createdSource: json['CreatedSource'],
-      createdDate: json['CreatedDate'],
-      updatedIP: json['UpdatedIP'],
-    );
-  }
+  factory Province.fromJson(Map<String, dynamic> json) =>
+      _$ProvinceFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProvinceToJson(this);
 }

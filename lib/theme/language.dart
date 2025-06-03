@@ -5,7 +5,7 @@ class AppTranslations extends Translations {
   Map<String, Map<String, String>> get keys => {
     'en_US': {
       'hello': 'Hello!',
-      'welcome': 'Welcome to my app',
+      'welcome': 'Welcome to app',
       'login': 'Login',
       'logout': 'Logout',
       'province': 'Province',
@@ -16,7 +16,7 @@ class AppTranslations extends Translations {
     },
     'vi_VN': {
       'hello': 'Xin chào!',
-      'welcome': 'Chào mừng đến với ứng dụng của tôi',
+      'welcome': 'Chào mừng đến với ứng dụng',
       'login': 'Đăng nhập',
       'logout': 'Đăng xuất',
       'province': 'Tỉnh',
