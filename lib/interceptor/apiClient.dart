@@ -5,7 +5,7 @@ class ApiClient {
     final dio = Dio(
       BaseOptions(
 //        baseUrl: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/",
-        baseUrl: "https://inta/api/v1/address/district-id",
+        baseUrl: "https://de.vn/shiip/public-api/master-data/",
         responseType: ResponseType.json,
         validateStatus: (_) => true,
         connectTimeout: const Duration(seconds: 10),
@@ -13,12 +13,27 @@ class ApiClient {
       ),
     );
 
+    Future<Response> retryRequest(Dio dioInstance, RequestOptions requestOptions) async {
+      requestOptions.extra['retried'] = true;
+      try {
+        print('[RETRY] Retrying request: ${requestOptions.method} ${requestOptions.path}');
+        final response = await dioInstance.fetch(requestOptions);
+        return response;
+      } catch (e) {
+        print('[RETRY FAILED] Request failed again.');
+        rethrow;
+      }
+    }
+
     dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
           options.extra['startTime'] = DateTime.now();
-          options.headers['Token'] = '8ff33aa8-baa7-11ef-9083-dadc35c0870d';
-          options.headers['Content-Type'] = 'application/json';
+          final needAuth = options.extra['auth'] ?? true;
+          if (needAuth) {
+            options.headers['Token'] = '8ff33aa8-baa7-11ef-9083-dadc35c0870d';
+            options.headers['Content-Type'] = 'application/json';
+          }
           print('[REQUEST] ${options.method} ${options.path}');
           return handler.next(options);
         },
@@ -32,7 +47,7 @@ class ApiClient {
           }
           return handler.next(response);
         },
-        onError: (error, handler) {
+        onError: (error, handler) async {
           final startTime = error.requestOptions.extra['startTime'] as DateTime?;
           final endTime = DateTime.now();
           if (startTime != null) {
@@ -40,6 +55,16 @@ class ApiClient {
             print('[ERROR] ${error.response?.statusCode} ${error.requestOptions.path}');
             print('[DURATION] ${duration.inMilliseconds} ms');
           }
+
+          if (error.requestOptions.extra['retried'] != true) {
+            try {
+              final response = await retryRequest(dio, error.requestOptions);
+              return handler.resolve(response);
+            } catch (e) {
+              return handler.next(error);
+            }
+          }
+
           return handler.next(error);
         },
       ),
@@ -48,7 +73,6 @@ class ApiClient {
     return dio;
   }
 }
-
 
 
 // Global Configuration

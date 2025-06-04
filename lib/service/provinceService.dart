@@ -9,8 +9,11 @@ class ProvinceService extends GetxService {
 
   Future<List<ProvinceResponse>> fetchProvinces() async {
     try {
-      final response = await _dio.get('province');
-
+      final response = await _dio.get(
+        'province',
+        // options: Options(extra: {'auth': false},
+        // )
+      );
       final apiResponse = ApiResponse<List<ProvinceResponse>>.fromJson(
         response.data,
             (data) => (data as List)
