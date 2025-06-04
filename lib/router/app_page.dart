@@ -33,7 +33,7 @@ class AppPages {
       page: () => ProvinceList(),
       binding: BindingsBuilder(() {
         Get.lazyPut<ProvinceService>(() => ProvinceService());
-        Get.lazyPut<ProvinceController>(() => ProvinceController(Get.find())..fetchProvinces());
+        Get.lazyPut<ProvinceController>(() => ProvinceController(Get.find()));
       }),
     ),
     GetPage(

@@ -16,7 +16,31 @@ class ProvinceService extends GetxService {
       );
       final apiResponse = ApiResponse<List<ProvinceResponse>>.fromJson(
         response.data,
-            (data) => (data as List)
+            (data) =>
+            (data as List)
+                .map((e) =>
+                ProvinceResponse.fromJson(e as Map<String, dynamic>))
+                .toList(),
+      );
+      if (apiResponse.code == 200) {
+        return apiResponse.data ?? [];
+      } else {
+        throw Exception('${apiResponse.message} (code: ${apiResponse.code})');
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  Future<List<ProvinceResponse>> fetchDistricts(String provinceId) async {
+    try {
+      final response = await _dio.post(
+        'district',
+        data: {'provinceId': provinceId},
+      );
+      final apiResponse = ApiResponse<List<ProvinceResponse>>.fromJson(
+        response.data,
+        (data) => (data as List)
             .map((e) => ProvinceResponse.fromJson(e as Map<String, dynamic>))
             .toList(),
       );
@@ -30,4 +54,3 @@ class ProvinceService extends GetxService {
     }
   }
 }
-

@@ -41,7 +41,7 @@ class HomeScreen extends GetWidget {
               onPressed: () => Get.toNamed(AppRoutes.settingScreen),
               child: Text('${'setting'.tr}'),
             ),
-
+            const SizedBox(height: 20),
             Image.network(
               'https://picsum.photos/200',
               height: 200,

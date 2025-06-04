@@ -4,8 +4,8 @@ class ApiClient {
   static Dio get instance {
     final dio = Dio(
       BaseOptions(
-//        baseUrl: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/",
-        baseUrl: "https://de.vn/shiip/public-api/master-data/",
+        baseUrl: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/",
+        // baseUrl: "https://de.vn/shiip/public-api/master-data/",
         responseType: ResponseType.json,
         validateStatus: (_) => true,
         connectTimeout: const Duration(seconds: 10),

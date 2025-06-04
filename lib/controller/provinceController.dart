@@ -9,6 +9,12 @@ class ProvinceController extends GetxController{
   final provinces = <ProvinceResponse>[].obs;
   var isLoading = false.obs;
 
+  @override
+  void onInit() {
+    super.onInit();
+    fetchProvinces();
+  }
+
   Future<void> fetchProvinces() async {
     try {
       isLoading.value = true;
