@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import '../config/apiConfig.dart';
+import '../interceptor/apiClient.dart';
 import '../model/response/provinceResponse.dart';
 import '../model/response/apiResponse.dart';
 
 class ProvinceService extends GetxService {
-  final Dio _dio = Dio(ApiConfig.options);
+  final Dio _dio = ApiClient.instance;
 
   Future<List<ProvinceResponse>> fetchProvinces() async {
     try {
