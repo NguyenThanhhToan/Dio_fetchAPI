@@ -1,4 +1,7 @@
+import 'package:basic_app/controller/formDataDioController.dart';
 import 'package:basic_app/controller/provinceController.dart';
+import 'package:basic_app/page/formDataDio.dart';
+import 'package:basic_app/service/formDataDioService.dart';
 import 'package:get/get.dart';
 import '../controller/districtController.dart';
 import '../middleWare/authMiddleware.dart';
@@ -48,6 +51,14 @@ class AppPages {
     GetPage(
       name: AppRoutes.settingScreen,
       page: () => const SettingScreen(),
+    ),
+    GetPage(
+      name: AppRoutes.formDataDioScreen,
+      page: () => UploadBookPage(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<UploadData>(() => UploadData());
+        Get.lazyPut<FormDataDioController>(() => FormDataDioController());
+      }),
     ),
 
   ];

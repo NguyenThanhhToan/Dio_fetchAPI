@@ -4,4 +4,5 @@ class AppRoutes {
   static const provinceListScreen = "/provinceList";
   static const districtScreen = "/district";
   static const settingScreen = "/setting";
+  static const formDataDioScreen = "/uploadBook";
 }

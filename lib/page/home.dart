@@ -42,6 +42,10 @@ class HomeScreen extends GetWidget {
               child: Text('${'setting'.tr}'),
             ),
             const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Get.toNamed(AppRoutes.formDataDioScreen),
+              child: Text('formDataDio'),
+            ),
             Image.network(
               'https://picsum.photos/200',
               height: 200,
